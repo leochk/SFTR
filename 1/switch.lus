@@ -1,0 +1,11 @@
+node SWITCH (orig, on, off : bool) returns (state : bool);
+let
+  state = orig -> if on then true else if off then false else pre state;
+tel
+
+node ONCE_FROM_TO (X, A, B : bool) returns (ok : bool);
+var xpresent : bool;
+let
+  ok = SWITCH (not X, A, B and xpresent);
+  xpresent = false -> xpresent or EDGE(X);
+tel

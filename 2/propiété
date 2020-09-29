@@ -1,0 +1,7 @@
+true -> (veilleuses => not codes and not phares) and (codes => not veilleuses and not phares) and (phares => not veilleuses and not codes)
+
+true -> (anti_brouillard => codes) and (longue_portee => phares)
+
+
+
+http://www-soc.lip6.fr/~ema/enseignement/

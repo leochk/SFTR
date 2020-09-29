@@ -1,0 +1,42 @@
+oc5:
+module: N1
+
+signals: 3
+   0: input:a - single:1 bool:0
+   1: output:x - single:2
+   2: output:y - single:3
+end: 
+
+variables: 4
+   0: $0
+   1: $0
+   2: $0
+   3: $0
+end: 
+
+actions: 9
+   0: present: 0
+   1: output: 1
+   2: output: 2
+   3: call:$0 (2) (@$0)
+   4: call:$0 (3) (@$0)
+   5: if: 1
+   6: call:$0 (3) (@$1)
+   7: call:$0 (2) (@$1)
+   8: call:$0 (3) ($5(2))
+end:
+
+states: 4
+startpoint: 0
+calls: 29
+0:  3 1 4 2 <1> 
+
+1:  5 ( 3 1 6 2 <2> )( 7 1 4 2 <3> )
+
+2:  7 1 5 ( 4 2)( 8 2) <3> 
+
+3:  7 1 4 2 <3> 
+
+end:
+
+endmodule:

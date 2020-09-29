@@ -1,0 +1,33 @@
+node jafter(X : bool) returns (Y : bool);
+var loc : bool;
+let
+    Y = false -> pre X;
+tel;
+
+node edge(X : bool) returns (Y : bool);
+let
+    Y = ((false -> not pre X) and X) or ((false -> pre X) and not X);
+tel;
+
+node switch(orig, on, off : bool) returns (state : bool);
+let
+  state = orig -> if on then true else if off then false else pre state;
+tel;
+
+node once_from_to(X, A, B : bool) returns (ok : bool);
+var xpresent : bool;
+let
+  ok = switch(not X, A, B and not pre xpresent);
+  xpresent = switch(false, X, B);
+tel;
+
+node N1(a : bool) returns (x,y : bool);
+let
+    x = 0 -> pre (x xor y) or (pre (not x and not y) and not a);
+    y = 0 -> (a and pre (not x and not y)) or ((not a) and (pre y and not x)) ;
+tel;
+
+node N2(r:bool) returns (s:bool);
+let
+    s = 0 -> r and not pre s;
+tel;

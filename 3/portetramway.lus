@@ -1,0 +1,24 @@
+
+
+node ControlePorte (porte_ouverte, demande_porte, en_station, attention_depart: bool)
+                    returns (porte_ok, ouvrir_porte, fermer_porte : bool);
+var depart_imminent, porte_demandee, accepter_demande, depart: bool;
+let
+  porte_ok =          (en_station and not porte_demandee and not porte_ouverte)
+                      or
+                      (en_station and porte_demandee and fermer_porte);
+
+  ouvrir_porte =      en_station and porte_demandee and not depart_imminent;
+  fermer_porte =      attention_depart;
+
+  depart =            not porte_ouverte and not en_station;
+  accepter_demande =  switch (true, depart, attention_depart);
+  porte_demandee =    switch (false, accepter_demande and demande_porte, porte_ouverte);
+  depart_imminent =   switch (false, attention_depart, depart);
+tel
+
+
+node switch (orig, on, off : bool) returns (state : bool);
+let
+  state = orig -> if on then true else if off then false else pre state;
+tel

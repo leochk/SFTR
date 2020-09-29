@@ -1,0 +1,19 @@
+autograph
+window "N1" "N1" 100 100 800 600 3000 3000
+labels 7
+0: "s0"
+1: "~a/"
+2: "s1"
+3: "+a/!y"
+4: "-a/!x"
+5: "s2"
+6: "~a/!x"
+vertices
+1: initial 100 100 unexpl names name struct 0 1 -10
+3: unexpl names name struct 2 1 -10
+5: unexpl names name struct 5 1 -10
+edges
+0: 1 3 names  name behav 1
+1: 3 5 names  name behav 3
+2: 3 5 names  name behav 4
+3: 5 5 names  name behav 6

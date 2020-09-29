@@ -1,0 +1,29 @@
+node FeuControleur(TD, TI, CP, AB, LP : bool) returns (veilleuses, codes, phares, anti_brouillard, longue_portee: bool);
+var stepT : int; stepC, isAB, isLP : bool;
+let
+  veilleuses =      if stepT = 1 then true
+                    else false;
+
+  codes =           if stepT = 2 and stepC then true
+                    else false;
+
+  phares =          if stepT = 2 and not stepC then true
+                    else false;
+
+  anti_brouillard = isAB and codes;
+
+  longue_portee =   isLP and phares;
+
+  stepT =      0 -> if TD and pre stepT < 2 then (pre stepT + 1) else
+                    if TI and pre stepT > 0 then (pre stepT - 1) else
+                    pre stepT;
+
+  stepC =      true -> if CP then (not pre stepC) else
+                       pre stepC;
+
+  isAB =      false -> if AB then (not pre isAB) else
+                       pre isAB;
+
+  isLP =      false -> if LP then (not pre isLP) else
+                       pre isLP;
+tel
